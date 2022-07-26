@@ -15,7 +15,7 @@ function App() {
     try {
       const data = await fetch("http://localhost:8000/api/flavors")
       console.log('data: ', data);
-      // setMessage(data)
+      setMessage(data)
     } catch (error) {
 
       console.log(error)
