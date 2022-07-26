@@ -12,7 +12,6 @@ const fakeDB = {
 		gold: 8
 	},
 	customers: {
-
 	}
 }
 
@@ -22,7 +21,8 @@ app.get('/api/', (req, res) => {
 });
 
 app.get('/api/flavors', (req, res) => {
-	res.send(fakeDB.flavors)
+	console.log("imhere: ", fakeDB.flavors)
+	res.send(JSON.stringify(fakeDB.flavors))
 });
 
 app.get('/api/flavor/:type', (req, res) => {
