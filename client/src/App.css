@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+.message{
+  color:aquamarine;
+  font-size: 100px;
+  border: 10px dotted darkcyan;
+  padding: 100px;
+}
