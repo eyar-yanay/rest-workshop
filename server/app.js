@@ -73,11 +73,22 @@ app.get('/api/flavor/:type', (req, res) => {
 });
 
 app.post('/api/flavor', (req, res) => {
+	console.log(req.body)
 	const newFlavor = req.body.newFlavor
-	const stock = req.body.stock
-	fakeDB.flavors.push({ [newFlavor]: stock })
-	fakeDBString = JSON.stringify(fakeDB)
-	res.send(fakeDBString)
+	const stock = parseInt(req.body.stock)
+	// search if the flavor is already exists 
+	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === newFlavor)
+	if (flavorIndex !== -1) { // if flavor is found
+		fakeDB.flavors[flavorIndex] = {
+			name: fakeDB.flavors[flavorIndex].name,
+			amount: fakeDB.flavors[flavorIndex].amount + stock
+		}
+	} else {
+	fakeDB.flavors.push({
+		name: newFlavor,
+		amount: stock
+	})}
+	res.json(fakeDB)
 })
 
 // customers API

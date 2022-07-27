@@ -8,17 +8,23 @@ function App() {
   const [customer, setCustomer] = useState();
 
   // state for inputs
-  const [newFlavor, setNewFlavor] = useState();
-  
+  const [newFlavor, setNewFlavor] = useState("");
+  const [newStock, setNewStock] = useState(1);
   const [searchFlavor, setSearchFlavor] = useState();
   const [amountFlavor, setAmountFlavor] = useState(1);
 
-  // handle functions
+  // handle functions for inputs
   const handleFlavorChange = (e) => {
     setSearchFlavor(e.target.value);
   }
   const handleAmountChange = (e) => {
     setAmountFlavor(e.target.value);
+  }
+  const handleNewFlavorChange = (e) => {
+    setNewFlavor(e.target.value);
+  }
+  const handleNewStockChange = (e) => {
+    setNewStock(e.target.value);
   }
 
   // fetch functions
@@ -41,7 +47,7 @@ function App() {
       alert(_SERVER_ERROR)
     }
   }
-
+  // excute the fetch functions when the component is mounted
   useEffect(() => {
     getFlavors();
     getCustomers();
@@ -49,9 +55,10 @@ function App() {
 
 
 
-  // search by flavor name, if not found a flavor return "no match"
-  // if flover is found and there is some stock, return the amount of stock by number 
-  // if flover is found and there is no stock, return "out of stock"
+  // search by flavor name, if not found a flavor  alert not found message
+  // if flover is found and there is some stock, alert the amount of stock by number 
+  // if flover is found and there is no stock,  alert "out of stock" message
+
   const search = async () => {
     try {
       const res = await fetch(`http://localhost:8000/api/flavor/buy?value=${searchFlavor}&amount=${amountFlavor}`) // fetching the data from the server
@@ -70,6 +77,23 @@ function App() {
     }
   }
 
+  const postFlavor = async () => {
+    try {
+      if (newFlavor === '' || newStock === '') {
+        alert("please fill all fields")
+        return
+      }
+       await fetch("http://localhost:8000/api/flavor", {
+        method: "POST", body: JSON.stringify({ newFlavor:newFlavor , stock:newStock }), headers: {
+          "Content-Type": "application/json"
+        }
+        
+      }) //posting data with body as example
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
 
   return (
 
@@ -84,12 +108,23 @@ function App() {
               <h1>welcome to our ice cream store</h1>
             </div>
             <h3>our stock right now:</h3>
+
             {
               allFlavors.map(flavor => {
                 return <div>{flavor.name}: {flavor.amount}</div> // mapping the data to the screen
               })
             }
+            <div>
+              <button onClick={async ()=>  {await postFlavor(); getFlavors()}}>Post data</button>
+              <input type="text" placeholder="new flavor" value={newFlavor} onChange={handleNewFlavorChange} />
+              <select placeholder='amount' value={newStock} onChange={handleNewStockChange}>
+                {_ARRAY_OF_NUMBERS.map(number => {
+                  return <option value={number}>{number}</option>
+                })}
+              </select>
+            </div>
           </div>
+
         }
 
         {customer &&
