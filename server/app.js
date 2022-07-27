@@ -11,8 +11,10 @@ const fakeDB = {
 		{ strawberry: 1 },
 		{ gold: 8 }
 	],
-	customers: {
-	}
+	customers: [{
+		name: 'John',
+		favoriteFlavor: 'vanilla'
+	}]
 }
 
 app.use(function (req, res, next) {
@@ -26,7 +28,7 @@ app.use(bodyParser.json())
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
-
+ // flavors API
 app.get('/api/flavors', (req, res) => {
 	const toGive = fakeDB.flavors
 	res.json(toGive)
@@ -47,6 +49,13 @@ app.post('/api/flavor', (req, res) => {
 	fakeDBString = JSON.stringify(fakeDB)
 	res.send(fakeDBString)
 })
+
+// customers API
+app.get('/api/customers', (req, res) => {
+	const toGive = fakeDB.customers
+	res.json(toGive)
+})
+
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}!`)
