@@ -8,11 +8,15 @@ function App() {
   // state for inputs
   const [newFlavor, setNewFlavor] = useState();
   const [searchFlavor, setSearchFlavor] = useState();
-  
+
   // handle functions
   const onClickFetch = () => {
     getFlavors();
     getCustomers();
+  }
+
+  const onClickPost = () => {
+    postFlavor();
   }
 
   const searchFlavorHandler = (e) => {
@@ -40,37 +44,55 @@ function App() {
     }
   }
 
-  
+  const postFlavor = async () => {
+    try {
+      console.log("positng faavloasdlkn")
+      const res = await fetch("http://localhost:8000/api/flavor", {
+        method: "POST", body: JSON.stringify({ "newFlavor": "example", "stock": 6 }), headers: {
+          "Content-Type": "application/json"
+        }
+      }) //posting data with body as example
+      const data = await res.json(); // converting the data to json from stringJSON (string)
+      console.log('data: ', data);
+      setAllFlavors(data.flavors); // setting the data to the state
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
   return (
 
     <div className="App">
       <div className="container">
-      <h1>welcome to our ice cream store</h1>
-      {allFlavors &&
-        <div className="message">
-          <h3>stock:</h3>
-          {
-            allFlavors.map(flavor => {
-              return <div>{Object.keys(flavor)}: {Object.values(flavor)}</div> // mapping the data to the screen
-            })
-          }
-        </div>}
+        <h1>welcome to our ice cream store</h1>
+        {allFlavors &&
+          <div className="message">
+            <h3>stock:</h3>
+            {
+              allFlavors.map(flavor => {
+                return <div>{Object.keys(flavor)}: {Object.values(flavor)}</div> // mapping the data to the screen
+              })
+            }
+          </div>}
 
         {customers &&
-      
-      <div className="customers">
-          <h4>our customers:</h4>
-         { customers.map(customer => {
-            return <div>hi {customer.name}, we know that your favorite Flavor is: {customer.favoriteFlavor}</div>
-          })}
-      </div>
+
+          <div className="customers">
+            <h4>our customers:</h4>
+            {customers.map(customer => {
+              return <div>hi {customer.name}, we know that your favorite Flavor is: {customer.favoriteFlavor}</div>
+            })}
+          </div>
         }
-      <button onClick={onClickFetch}>Fetch data</button>
+
+        <button onClick={onClickFetch}>Fetch data</button>
+        <button onClick={onClickPost}>Post data</button>
 
         <div className="search-flavor">
           <input type="text" placeholder="search flavor" value={searchFlavor} onChange={searchFlavorHandler} />
         </div>
-        </div>
+      </div>
     </div>
   );
 }

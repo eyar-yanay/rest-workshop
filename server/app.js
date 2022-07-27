@@ -28,7 +28,7 @@ app.use(bodyParser.json())
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
- // flavors API
+// flavors API
 app.get('/api/flavors', (req, res) => {
 	const toGive = fakeDB.flavors
 	res.json(toGive)
@@ -43,11 +43,11 @@ app.get('/api/flavor/:type', (req, res) => {
 });
 
 app.post('/api/flavor', (req, res) => {
+	console.log(req.body)
 	const newFlavor = req.body.newFlavor
 	const stock = req.body.stock
 	fakeDB.flavors.push({ [newFlavor]: stock })
-	fakeDBString = JSON.stringify(fakeDB)
-	res.send(fakeDBString)
+	res.json(fakeDB)
 })
 
 // customers API
