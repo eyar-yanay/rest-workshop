@@ -9,6 +9,7 @@ function App() {
 
   // state for inputs
   const [newFlavor, setNewFlavor] = useState();
+  
   const [searchFlavor, setSearchFlavor] = useState();
   const [amountFlavor, setAmountFlavor] = useState(1);
 
@@ -40,12 +41,12 @@ function App() {
       alert(_SERVER_ERROR)
     }
   }
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     getFlavors();
     getCustomers();
-  },[])
-  
+  }, [])
+
 
 
   // search by flavor name, if not found a flavor return "no match"
@@ -62,7 +63,7 @@ function App() {
       else if (data === "out of stock") {
         alert("out of stock")
       } else {
-       alert("you bought " + amountFlavor + " " + searchFlavor)
+        alert("you bought " + amountFlavor + " " + searchFlavor)
       }
     } catch (error) {
       alert(_SERVER_ERROR)
@@ -75,27 +76,26 @@ function App() {
     <div className="App">
       <div className="container">
 
-        <div >
-          <h1>welcome to our ice cream store</h1>
-        </div>
+
 
         {allFlavors &&
           <div className="message">
-            <h3>stock:</h3>
+            <div >
+              <h1>welcome to our ice cream store</h1>
+            </div>
+            <h3>our stock right now:</h3>
             {
               allFlavors.map(flavor => {
                 return <div>{flavor.name}: {flavor.amount}</div> // mapping the data to the screen
               })
             }
-          </div>}
+          </div>
+        }
 
         {customer &&
-
           <div className="customers">
             <h4>our customers:</h4>
-           
-               <div>[{customer.name}] we know that his favorite Flavor is: {customer.favoriteFlavor}</div>
-          
+            <div>[{customer.name}] we know that his favorite Flavor is: {customer.favoriteFlavor}</div>
           </div>
         }
 
@@ -106,14 +106,14 @@ function App() {
               return <option value={number}>{number}</option>
             })}
           </select>
-          
+
           {/* <input type="text" placeholder="search flavor" value={searchFlavor} onChange={handleFlavorChange} /> */}
-         { allFlavors && <select placeholder='flavor name' value={searchFlavor} onChange={handleFlavorChange}>
+          {allFlavors && <select placeholder='flavor name' value={searchFlavor} onChange={handleFlavorChange}>
             {allFlavors.map(flavor => {
               return <option value={flavor.name}>{flavor.name}</option>
             })}
-          </select> }          
-          <button onClick={() => {search(); getFlavors()}}>buy</button>
+          </select>}
+          <button onClick={() => { search(); getFlavors() }}>buy</button>
         </div>
       </div>
     </div>
