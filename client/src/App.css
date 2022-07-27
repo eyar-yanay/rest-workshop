@@ -5,35 +5,60 @@
   height: 100vh;
   background-image: url("./ice-cream.jpg");
   background-size: cover;
+
 }
-.container{
+
+.container {
+  margin-bottom: 7vh;
+  opacity: 0.95;
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 30%;
   height: 70%;
   padding: 40px;
-  background-color: #f5f5f5; 
-  box-shadow: grey;
+  background-color: #f5f5f5;
+  box-shadow: blue 0px 0px 0px 2px inset,
+    rgb(255, 255, 255) 10px -10px 0px -3px,
+    rgb(31, 193, 27) 10px -10px,
+    rgb(255, 255, 255) 20px -20px 0px -3px,
+    rgb(255, 217, 19) 20px -20px,
+    rgb(255, 255, 255) 30px -30px 0px -3px,
+    rgb(255, 156, 85) 30px -30px,
+    rgb(255, 255, 255) 40px -40px 0px -3px,
+    rgb(255, 85, 85) 40px -40px;
   border-radius: 10px;
   border: black solid 2px;
 }
-.message, .customers{
-  color:black;
+
+.message,
+.customers {
+  color: black;
   font-size: 20px;
-  border: 10px dotted darkcyan;
-  padding: 10px;
+  padding: 20px;
+  border: double 5px black;
 }
 
-.customers{
-  border: 10px double red;
-  padding: 10px;
+.message {
+  border-color: rgb(255, 217, 19);
 }
-.search-flavor{
-  background-color: gray;
+
+.customers {
+  border-color: rgb(31, 193, 27);
 }
-.button{
-  
+
+.search-flavor {
+  background-color: rgb(255, 156, 85);
+  border-radius: 5px ;
+}
+
+.button-container {
+  position: relative;
+  width: 100%;
+}
+
+.go-down {
+  margin-bottom: -5%;
 }

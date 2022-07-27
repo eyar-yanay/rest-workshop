@@ -4,16 +4,25 @@ const bodyParser = require('body-parser')
 const app = express();
 const port = 8000;
 
-const fakeDB = {
+let fakeDB = {
 	flavors: [
-		{ vanilla: 2 },
-		{ cocoa: 5 },
-		{ strawberry: 1 },
-		{ gold: 8 }
+		{ name: "vanilla", amount: 2 },
+		{ name: "chocolate", amount: 5 },
+		{ name: "strawberry", amount: 1 },
+		{ name: "mint", amount: 8 }
 	],
 	customers: [{
+		id: 1,
 		name: 'John',
 		favoriteFlavor: 'vanilla'
+	}, {
+		id: 2,
+		name: 'Jane',
+		favoriteFlavor: 'cocoa'
+	}, {
+		id: 3,
+		name: 'Bob',
+		favoriteFlavor: 'strawberry'
 	}]
 }
 
@@ -28,10 +37,31 @@ app.use(bodyParser.json())
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
- // flavors API
-app.get('/api/flavors', (req, res) => {
+// flavors API
+app.get('/api/flavor', (req, res) => {
 	const toGive = fakeDB.flavors
 	res.json(toGive)
+});
+
+app.get('/api/flavor/buy', (req, res) => {
+	// validate that query of value is existent
+	const value = req.query.value
+	const amount = req.query.amount
+
+	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === value)
+	if (flavorIndex !== -1) { // if flavor is found
+		if (fakeDB.flavors[flavorIndex].amount >= amount) { // if there is enough stock
+			fakeDB.flavors[flavorIndex] = {
+				name: fakeDB.flavors[flavorIndex].name,
+				amount: fakeDB.flavors[flavorIndex].amount - amount
+			}
+		} else { // if there is not enough stock
+			res.json('out of stock')
+		}
+		res.json(fakeDB.flavors[flavorIndex].amount)
+	} else { // if flavor is not found
+		res.json('not found')
+	}
 });
 
 app.get('/api/flavor/:type', (req, res) => {
@@ -51,8 +81,8 @@ app.post('/api/flavor', (req, res) => {
 })
 
 // customers API
-app.get('/api/customers', (req, res) => {
-	const toGive = fakeDB.customers
+app.get('/api/customer/:id', (req, res) => {
+	const toGive = fakeDB.customers.find(customer => customer.id == req.params.id)
 	res.json(toGive)
 })
 
