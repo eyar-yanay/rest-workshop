@@ -5,24 +5,31 @@ const app = express();
 const port = 8000;
 
 const fakeDB = {
-	flavors: {
-		vanilla: 2,
-		cocoa: 5,
-		strawberry: 1,
-		gold: 8
-	},
+	flavors: [
+		{ vanilla: 2 },
+		{ cocoa: 5 },
+		{ strawberry: 1 },
+		{ gold: 8 }
+	],
 	customers: {
 	}
 }
 
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next()
+});
+
 app.use(bodyParser.json())
+
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
 
 app.get('/api/flavors', (req, res) => {
-	console.log("imhere: ", fakeDB.flavors)
-	res.send(JSON.stringify(fakeDB.flavors))
+	const toGive = fakeDB.flavors
+	res.json(toGive)
 });
 
 app.get('/api/flavor/:type', (req, res) => {
@@ -36,10 +43,7 @@ app.get('/api/flavor/:type', (req, res) => {
 app.post('/api/flavor', (req, res) => {
 	const newFlavor = req.body.newFlavor
 	const stock = req.body.stock
-	Object.assign(fakeDB.flavors, { [newFlavor]: stock })
-
-	// cleaner way to do the same thing
-	// fakeDB.flavors[newFlavor] = stock
+	fakeDB.flavors.push({ [newFlavor]: stock })
 	fakeDBString = JSON.stringify(fakeDB)
 	res.send(fakeDBString)
 })

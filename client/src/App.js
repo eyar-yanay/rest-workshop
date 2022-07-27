@@ -5,21 +5,13 @@ function App() {
 
   const [message, setMessage] = useState();
 
-  useEffect(() => {
-    (async () => {
-      //make the fetch request here (in a try & catch block), and enter the data you receive to the message state
-    })();
-  }, []);
-
-  const handleClick = async () => {
+  const getFlavors = async () => {
     try {
-      const data = await fetch("http://localhost:8000/api/flavors")
-      console.log('data: ', data);
-      // setMessage(data)
+      const res = await fetch("http://localhost:8000/api/flavors")
+      const data = await res.text()
+      setMessage(data)
     } catch (error) {
-
       console.log(error)
-      setMessage("error! :", error)
     }
   }
 
@@ -30,7 +22,7 @@ function App() {
         <div className="message">
           {message}
         </div>}
-      <button onClick={handleClick}>Fetch data</button>
+      <button onClick={getFlavors}>Fetch data</button>
     </div>
   );
 }
