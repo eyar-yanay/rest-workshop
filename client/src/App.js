@@ -27,7 +27,14 @@ function App() {
     setNewStock(e.target.value);
   }
 
-  // fetch functions
+  
+  // excute the fetch functions when the component is mounted
+  useEffect(() => {
+    getFlavors();
+    getCustomer();
+  }, [])
+
+  // example fetch functions
   const getFlavors = async () => {
     try {
       const res = await fetch("http://localhost:8000/api/flavor") // fetching the data from the server
@@ -55,7 +62,7 @@ function App() {
   }
 
   const postFlavor = async () => {
-  // third mission: add a new flavor - passing amount and flavor name using body
+  // third mission: add a new flavor - passing amount and flavor name using body  
   }
 
 
