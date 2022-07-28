@@ -39,8 +39,9 @@ app.get('/api/', (req, res) => {
 
 // flavors API
 app.get('/api/flavor', (req, res) => {
-	const toGive = fakeDB.flavors
-	res.json(toGive)
+	//mission 1 - uncomment following lines.
+	// const toGive = fakeDB.flavors
+	// res.json(toGive) use //use res.json to return res as json
 });
 
 app.get('/api/flavor/buy', (req, res) => {
