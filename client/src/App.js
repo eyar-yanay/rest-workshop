@@ -27,6 +27,13 @@ function App() {
     setNewStock(e.target.value);
   }
 
+  
+  // excute the fetch functions when the component is mounted
+  useEffect(() => {
+    getFlavors();
+    getCustomer();
+  }, [])
+
   // fetch functions
   const getFlavors = async () => {
     try {
@@ -38,27 +45,10 @@ function App() {
     }
   }
 
-  const getCustomers = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/api/customer/2") // fetching the data from the server
-      const data = await res.json(); // converting the data to json from stringJSON (string)
-      setCustomer(data); // setting the data to the state
-    } catch (error) {
-      alert(_SERVER_ERROR)
-    }
+  const getCustomer = async () => {
+    //mission 1: implement this function to fetch user by id using param inside the url
   }
-  // excute the fetch functions when the component is mounted
-  useEffect(() => {
-    getFlavors();
-    getCustomers();
-  }, [])
-
-
-
-  // search by flavor name, if not found a flavor  alert not found message
-  // if flover is found and there is some stock, alert the amount of stock by number 
-  // if flover is found and there is no stock,  alert "out of stock" message
-
+    
   const search = async () => {
     try {
       const res = await fetch(`http://localhost:8000/api/flavor/buy?value=${searchFlavor}&amount=${amountFlavor}`) // fetching the data from the server

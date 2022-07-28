@@ -39,10 +39,14 @@ app.get('/api/', (req, res) => {
 
 // flavors API
 app.get('/api/flavor', (req, res) => {
-	//mission 1 - uncomment following lines.
-	// const toGive = fakeDB.flavors
-	// res.json(toGive) use //use res.json to return res as json
+	const toGive = fakeDB.flavors
+	res.json(toGive) //use res.json to return res as json
 });
+
+//customers API
+app.get('/api/customer/:id', (req, res) => {
+	//mission 1: return to client customer from FakeDB - specified by param
+})
 
 app.get('/api/flavor/buy', (req, res) => {
 	// validate that query of value is existent
@@ -65,38 +69,25 @@ app.get('/api/flavor/buy', (req, res) => {
 	}
 });
 
-app.get('/api/flavor/:type', (req, res) => {
-	const type = req.params.type
-	const give = { count: fakeDB.flavors[type] }
-	if (give.count === undefined || give === 0)
-		(res.send('out of stock'))
-	else res.send(give)
-});
-
 app.post('/api/flavor', (req, res) => {
-	console.log(req.body)
-	const newFlavor = req.body.newFlavor
-	const stock = parseInt(req.body.stock)
-	// search if the flavor is already exists 
-	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === newFlavor)
-	if (flavorIndex !== -1) { // if flavor is found
-		fakeDB.flavors[flavorIndex] = {
-			name: fakeDB.flavors[flavorIndex].name,
-			amount: fakeDB.flavors[flavorIndex].amount + stock
-		}
-	} else {
-	fakeDB.flavors.push({
-		name: newFlavor,
-		amount: stock
-	})}
-	res.json(fakeDB)
+		console.log(req.body)
+		const newFlavor = req.body.newFlavor
+		const stock = parseInt(req.body.stock)
+		// search if the flavor is already exists 
+		const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === newFlavor)
+		if (flavorIndex !== -1) { // if flavor is found
+			fakeDB.flavors[flavorIndex] = {
+				name: fakeDB.flavors[flavorIndex].name,
+				amount: fakeDB.flavors[flavorIndex].amount + stock
+			}
+		} else {
+		fakeDB.flavors.push({
+			name: newFlavor,
+			amount: stock
+		})}
+		res.json(fakeDB)
 })
 
-//customers API
-app.get('/api/customer/:id', (req, res) => {
-	const toGive = fakeDB.customers.find(customer => customer.id == req.params.id)
-	res.json(toGive)
-})
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}!`)
