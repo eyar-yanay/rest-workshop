@@ -43,59 +43,14 @@ app.get('/api/flavor', (req, res) => {
 	res.json(toGive)
 });
 
-app.get('/api/flavor/buy', (req, res) => {
-	// validate that query of value is existent
-	const value = req.query.value
-	const amount = req.query.amount
 
-	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === value)
-	if (flavorIndex !== -1) { // if flavor is found
-		if (fakeDB.flavors[flavorIndex].amount >= amount) { // if there is enough stock
-			fakeDB.flavors[flavorIndex] = {
-				name: fakeDB.flavors[flavorIndex].name,
-				amount: fakeDB.flavors[flavorIndex].amount - amount
-			}
-		} else { // if there is not enough stock
-			res.json('out of stock')
-		}
-		res.json(fakeDB.flavors[flavorIndex].amount)
-	} else { // if flavor is not found
-		res.json('not found')
-	}
-});
+// First Mission - (GET) create a route that return one customer by id from req.params
 
-app.get('/api/flavor/:type', (req, res) => {
-	const type = req.params.type
-	const give = { count: fakeDB.flavors[type] }
-	if (give.count === undefined || give === 0)
-		(res.send('out of stock'))
-	else res.send(give)
-});
+// Second Mission - (PUT) create a route that handle buying ice cream flavor by id from req.query
 
-app.post('/api/flavor', (req, res) => {
-	console.log(req.body)
-	const newFlavor = req.body.newFlavor
-	const stock = parseInt(req.body.stock)
-	// search if the flavor is already exists 
-	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === newFlavor)
-	if (flavorIndex !== -1) { // if flavor is found
-		fakeDB.flavors[flavorIndex] = {
-			name: fakeDB.flavors[flavorIndex].name,
-			amount: fakeDB.flavors[flavorIndex].amount + stock
-		}
-	} else {
-	fakeDB.flavors.push({
-		name: newFlavor,
-		amount: stock
-	})}
-	res.json(fakeDB)
-})
+// Third Mission - (Post) create a route that handle adding new flavor to the fakeDB.flavors through req.body
 
-// customers API
-app.get('/api/customer/:id', (req, res) => {
-	const toGive = fakeDB.customers.find(customer => customer.id == req.params.id)
-	res.json(toGive)
-})
+// Extra Mission - (Delete) create a route that handle deleting flavor from the fakeDB.flavors through req.params
 
 
 app.listen(port, () => {
