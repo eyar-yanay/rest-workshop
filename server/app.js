@@ -45,49 +45,14 @@ app.get('/api/flavor', (req, res) => {
 
 //customers API
 app.get('/api/customer/:id', (req, res) => {
-	//mission 1: return to client customer from FakeDB - specified by param
+	//First Mission: return to client customer from FakeDB - specified by param
 })
 
-app.get('/api/flavor/buy', (req, res) => {
-	// validate that query of value is existent
-	const value = req.query.value
-	const amount = req.query.amount
+// Second Mission - (PUT) create a route that handles buying ice cream flavor by id from req.query, recive flavor and amount from query
+	
+// Third Mission - (Post) create a route that handle adding new flavor to the fakeDB. receive flavors through req.body
 
-	const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === value)
-	if (flavorIndex !== -1) { // if flavor is found
-		if (fakeDB.flavors[flavorIndex].amount >= amount) { // if there is enough stock
-			fakeDB.flavors[flavorIndex] = {
-				name: fakeDB.flavors[flavorIndex].name,
-				amount: fakeDB.flavors[flavorIndex].amount - amount
-			}
-		} else { // if there is not enough stock
-			res.json('out of stock')
-		}
-		res.json(fakeDB.flavors[flavorIndex].amount)
-	} else { // if flavor is not found
-		res.json('not found')
-	}
-});
-
-app.post('/api/flavor', (req, res) => {
-		console.log(req.body)
-		const newFlavor = req.body.newFlavor
-		const stock = parseInt(req.body.stock)
-		// search if the flavor is already exists 
-		const flavorIndex = fakeDB.flavors.findIndex(flavor => flavor.name === newFlavor)
-		if (flavorIndex !== -1) { // if flavor is found
-			fakeDB.flavors[flavorIndex] = {
-				name: fakeDB.flavors[flavorIndex].name,
-				amount: fakeDB.flavors[flavorIndex].amount + stock
-			}
-		} else {
-		fakeDB.flavors.push({
-			name: newFlavor,
-			amount: stock
-		})}
-		res.json(fakeDB)
-})
-
+// Extra Mission - (Delete) create a route that handle deleting flavor from the fakeDB.flavors through req.params
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}!`)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { _ARRAY_OF_NUMBERS, _SERVER_ERROR } from './const';
 
-function App() {
+function AnswersDontLook() {
   // states for data from server
   const [allFlavors, setAllFlavors] = useState();
   const [customer, setCustomer] = useState();
@@ -27,53 +27,87 @@ function App() {
     setNewStock(e.target.value);
   }
 
-  
-  // excute the fetch functions when the component is mounted
-  useEffect(() => {
-    getFlavors();
-    getCustomer();
-  }, [])
-
-  // example fetch functions
+  // fetch functions
   const getFlavors = async () => {
     try {
       const res = await fetch("http://localhost:8000/api/flavor") // fetching the data from the server
       const data = await res.json(); // converting the data to json from stringJSON (string)
       setAllFlavors(data); // setting the data to the state
+      setSearchFlavor(data[0].name); // setting the first flavor to the search flavor
     } catch (error) {
       alert(_SERVER_ERROR)
     }
   }
 
-  const getCustomer = async () => {
-    //Fitsr mission: implement this function to fetch user by id using param whitin the url
+  const getCustomers = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/api/customer/2") // fetching the data from the server
+      const data = await res.json(); // converting the data to json from stringJSON (string)
+      setCustomer(data); // setting the data to the state
+    } catch (error) {
+      alert(_SERVER_ERROR)
+    }
   }
-    
-  const buy = async () => {
-  // second mission: buy a flavor by name and quantity using searchFlavor and amountFlavor states. use PUT method and query to pass the information
+  // excute the fetch functions when the component is mounted
+  useEffect(() => {
+    getFlavors();
+    getCustomers();
+  }, [])
+
+
+
+  // search by flavor name, if not found a flavor  alert not found message
+  // if flover is found and there is some stock, alert the amount of stock by number 
+  // if flover is found and there is no stock,  alert "out of stock" message
+
+  const updateFlavorAmount = async () => {
+    try {
+      const res = await fetch(`http://localhost:8000/api/flavor?value=${searchFlavor}&amount=${amountFlavor}`, { method:'PUT' }) // fetching the data from the server
+    } catch (error) {
+      console.log('error: ', error);
+      
+      alert(_SERVER_ERROR)
+      throw error;
+    }
   }
 
   const postFlavor = async () => {
-  // third mission: add a new flavor - passing amount and flavor name using body  
+    try {
+      if (newFlavor === '' || newStock === '') {
+        alert("please fill all fields")
+        return
+      }
+       await fetch("http://localhost:8000/api/flavor", {
+        method: "POST", body: JSON.stringify({ newFlavor:newFlavor , stock:newStock }), headers: {
+          "Content-Type": "application/json"
+        }
+        
+      }) //posting data with body as example
+    } catch (error) {
+      console.error(error)
+    }
   }
 
 
   return (
+
     <div className="App">
       <div className="container">
+
+
+
         {allFlavors &&
           <div className="message">
             <div >
               <h1>welcome to our ice cream store</h1>
             </div>
-            <h3>our stock right now:</h3>
+            <h3>our stock right now:</h3> 
 
             {
               allFlavors.map(flavor => {
                 return <div>{flavor.name}: {flavor.amount}</div> // mapping the data to the screen
               })
             }
-
             <div>
               <button onClick={async ()=>  {await postFlavor(); getFlavors()}}>Post data</button>
               <input type="text" placeholder="new flavor" value={newFlavor} onChange={handleNewFlavorChange} />
@@ -95,7 +129,7 @@ function App() {
         }
 
         <div className="search-flavor">
-          <h4>update the stock:</h4>
+        <h4>update the stock:</h4>
           <select placeholder='amount' value={amountFlavor} onChange={handleAmountChange}>
             {_ARRAY_OF_NUMBERS.map(number => {
               return <option value={number}>{number}</option>
@@ -107,12 +141,12 @@ function App() {
             {allFlavors.map(flavor => {
               return <option value={flavor.name}>{flavor.name}</option>
             })}
-          </select>}z
-          <button onClick={() => { buy(); getFlavors() }}>buy</button>
+          </select>}
+          <button onClick={() => { updateFlavorAmount(); getFlavors() }}>update</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default App;
+export default AnswersDontLook
