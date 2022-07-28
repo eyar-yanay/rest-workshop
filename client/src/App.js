@@ -41,16 +41,16 @@ function App() {
   // excute the fetch functions when the component is mounted
   useEffect(() => {
     getFlavors();
-    getCustomers();
+    getCustomer();
   }, [])
 
 
 
-  const getCustomers = async () => {
+  const getCustomer = async () => {
   // first mission: get the customer with id 2 from the server by including the id in the url as a parameter
   }
 
-  const buy = async () => {
+  const updateFlavorAmount = async () => {
   // second mission: buy a flavor by name and quantity using searchFlavor and amountFlavor states. here 
   }
 
@@ -109,7 +109,7 @@ function App() {
               return <option value={flavor.name}>{flavor.name}</option>
             })}
           </select>}z
-          <button onClick={() => { buy(); getFlavors() }}>buy</button>
+          <button onClick={() => { updateFlavorAmount(); getFlavors() }}>update</button>
         </div>
       </div>
     </div>

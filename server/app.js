@@ -37,7 +37,7 @@ app.use(bodyParser.json())
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
-// flavors API
+// get all flavors from the fakeDB
 app.get('/api/flavor', (req, res) => {
 	const toGive = fakeDB.flavors
 	res.json(toGive)

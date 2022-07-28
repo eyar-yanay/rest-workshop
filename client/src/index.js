@@ -7,8 +7,8 @@ import AnswersDontLook from './AnswersDontLook';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AnswersDontLook />
-    {/* <App /> */}
+    {/* <AnswersDontLook /> */}
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -39,7 +39,7 @@ function AnswersDontLook() {
     }
   };
 
-  const getCustomers = async () => {
+  const getCustomer = async () => {
     try {
       const res = await fetch("http://localhost:8000/api/customer/2"); // fetching the data from the server
       const data = await res.json(); // converting the data to json from stringJSON (string)
@@ -51,24 +51,22 @@ function AnswersDontLook() {
   // excute the fetch functions when the component is mounted
   useEffect(() => {
     getFlavors();
-    getCustomers();
+    getCustomer();
   }, []);
 
 
 
-  // search by flavor name, if not found a flavor  alert not found message
-  // if flover is found and there is some stock, alert the amount of stock by number 
-  // if flover is found and there is no stock,  alert "out of stock" message
-
+  // second mission: buy a flavor by name and quantity using searchFlavor and amountFlavor states. here 
   const updateFlavorAmount = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/flavor?flavor=${searchFlavor}&amount=${amountFlavor}`, { method: 'PUT' }); // fetching the data from the server
+      await fetch(`http://localhost:8000/api/flavor?flavor=${searchFlavor}&amount=${amountFlavor}`, { method: 'PUT' }); // fetching the data from the server
     } catch (error) {
       alert(_SERVER_ERROR);
       throw error;
     }
   };
 
+  // third mission: add a new flavor - passing amount and flavor name using body
   const postFlavor = async () => {
     try {
       if (newFlavor === '' || newStock === '') {
