@@ -18,7 +18,7 @@ let fakeDB = {
 	}, {
 		id: 2,
 		name: 'Jane',
-		favoriteFlavor: 'cocoa'
+		favoriteFlavor: 'chocolate'
 	}, {
 		id: 3,
 		name: 'Bob',
@@ -33,10 +33,10 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json())
-
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' })
 });
+
 // flavors API
 app.get('/api/flavor', (req, res) => {
 	const toGive = fakeDB.flavors
@@ -91,12 +91,11 @@ app.post('/api/flavor', (req, res) => {
 	res.json(fakeDB)
 })
 
-// customers API
+//customers API
 app.get('/api/customer/:id', (req, res) => {
 	const toGive = fakeDB.customers.find(customer => customer.id == req.params.id)
 	res.json(toGive)
 })
-
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}!`)
