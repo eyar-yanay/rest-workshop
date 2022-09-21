@@ -98,65 +98,66 @@ function App() {
         {allFlavors &&
           <div className="message">
             <h3 className='our-message'>Our stock right now:</h3>
+            
             <div className='flavours'>
               {
                 allFlavors.map(flavor => {
                   return <div className={flavor.name}>{flavor.name} <br /> {flavor.amount}</div> // mapping the data to the screen
                 })
               }
-              )
+              
 
-              <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '5vh', color: 'black' }}>
-                <button className='post-button' onClick={async () => { await postFlavor(); getFlavors() }}>Post data</button>
-                <input className='post-input' type="text" placeholder="new flavor" value={newFlavor} onChange={handleNewFlavorChange} />
-                <select className='post-select' placeholder='amount' value={newStock} onChange={handleNewStockChange}>
-                  {_ARRAY_OF_NUMBERS.map(number => {
-                    return <option value={number}>{number}</option>
-                  })}
-                </select>
-              </div>
             </div>
-
-
-
-            {customer &&
-              <div className="customers">
-                <h4>our customers:</h4>
-                <div>[{customer.name}] We know that his favorite Flavor is: {customer.favoriteFlavor}</div>
-              </div>
-            }
-
-            <div className="search-flavor">
-              <h4>Update the stock:</h4>
-              <div className='search-div'>
-                <select className='search post-select' placeholder='amount' value={amountFlavor} onChange={handleAmountChange}>
-                  {_ARRAY_OF_NUMBERS.map(number => {
-                    return <option value={number}>{number}</option>
-                  })}
-                </select>
-
-                {/* <input type="text" placeholder="search flavor" value={searchFlavor} onChange={handleFlavorChange} /> */}
-                {allFlavors && <select className='search post-select' placeholder='flavor name' value={searchFlavor} onChange={handleFlavorChange}>
-                  {allFlavors.map(flavor => {
-                    return <option value={flavor.name}>{flavor.name}</option>
-                  })}
-                </select>}
-                <button className='post-button' onClick={() => { updateFlavorAmount(); getFlavors() }}>update</button>
-              </div>
-            </div >
-
-            <div className="search-flavor">
-              <h4>Remove a flavor:</h4>
-              {allFlavors && <select placeholder='flavor name' value={delFlavor} onChange={handleDelFlavor}>
-                {allFlavors.map(flavor => {
-                  return <option value={flavor.name}>{flavor.name}</option>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '5vh', color: 'black' }}>
+              <button className='post-button' onClick={async () => { await postFlavor(); getFlavors() }}>Post data</button>
+              <input className='post-input' type="text" placeholder="new flavor" value={newFlavor} onChange={handleNewFlavorChange} />
+              <select className='post-select' placeholder='amount' value={newStock} onChange={handleNewStockChange}>
+                {_ARRAY_OF_NUMBERS.map(number => {
+                  return <option value={number}>{number}</option>
                 })}
-              </select>}z
-              <button onClick={() => { deleteFlavor(); getFlavors() }}>delete</button>
+              </select>
             </div>
-
           </div >}
+
+
+
+        {customer &&
+          <div className="customers">
+            <h4>Our customers:</h4>
+            <div>[{customer.name}] We know that his favorite Flavor is: {customer.favoriteFlavor}</div>
           </div>
+        }
+
+        <div className="search-flavor">
+          <h4>Update the stock:</h4>
+          <div className='search-div'>
+            <select className='search post-select' placeholder='amount' value={amountFlavor} onChange={handleAmountChange}>
+              {_ARRAY_OF_NUMBERS.map(number => {
+                return <option value={number}>{number}</option>
+              })}
+            </select>
+
+            {/* <input type="text" placeholder="search flavor" value={searchFlavor} onChange={handleFlavorChange} /> */}
+            {allFlavors && <select className='search post-select' placeholder='flavor name' value={searchFlavor} onChange={handleFlavorChange}>
+              {allFlavors.map(flavor => {
+                return <option value={flavor.name}>{flavor.name}</option>
+              })}
+            </select>}
+            <button className='post-button' onClick={() => { updateFlavorAmount(); getFlavors() }}>update</button>
+          </div>
+        </div >
+
+        <div className="search-flavor">
+          <h4>Remove a flavor:</h4>
+          {allFlavors && <select className='search post-select' placeholder='flavor name' value={delFlavor} onChange={handleDelFlavor}>
+            {allFlavors.map(flavor => {
+              return <option value={flavor.name}>{flavor.name}</option>
+            })}
+          </select>}
+          <button  className='post-button' onClick={() => { deleteFlavor(); getFlavors() }}>delete</button>
+        </div>
+
+      </div>
     </div >
   );
 }

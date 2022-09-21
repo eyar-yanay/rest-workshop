@@ -25,28 +25,15 @@
 }
 
 .container {
-  /* margin-bottom: 7vh; */
   opacity: 0.95;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
-  /* width: 30%; */
   height: 70%;
   padding: 40px;
-  /* background-color: #f5f5f5; */
-  /* box-shadow: blue 0px 0px 0px 2px inset,
-    rgb(255, 255, 255) 10px -10px 0px -3px,
-    rgb(31, 193, 27) 10px -10px,
-    rgb(255, 255, 255) 20px -20px 0px -3px,
-    rgb(255, 217, 19) 20px -20px,
-    rgb(255, 255, 255) 30px -30px 0px -3px,
-    rgb(255, 156, 85) 30px -30px,
-    rgb(255, 255, 255) 40px -40px 0px -3px,
-    rgb(255, 85, 85) 40px -40px; */
-  /* border-radius: 10px; */
-  /* border: black solid 2px; */
+  flex-wrap: wrap;
 }
 
 
@@ -58,10 +45,12 @@
   /* border: double 5px black; */
   background-color: #9be2cb;
   border-radius: 3vh;
-  height: 35vh;
-  width: 35vw;
+  height: 32vh;
+  width: 32vw;
 
-} .message:hover{
+}
+
+.message:hover {
   animation-duration: 0.5s;
   animation-name: animate-pop;
   animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
@@ -124,15 +113,14 @@
 */
 
 .search-flavor {
-  height: 35vh;
   background: #9be2cb;
-  width: 35vw;
   border-radius: 3vh;
   color: white;
   font-size: 4.5vh;
   padding: 20px;
-
-  
+  height: 32vh;
+  width: 32vw;
+  margin: 3vh;
 }
 
 .search-div {
@@ -153,14 +141,16 @@
   background-color: beige;
   width: 8vw;
   border-radius: 2vh;
-  line-height: 7vh;
+  line-height: 5vh;
+  height: 11vh;
 }
 
 .chocolate {
   background-color: chocolate;
   width: 8vw;
   border-radius: 2vh;
-  line-height: 7vh;
+  line-height: 5vh;
+  height: 11vh;
 
 }
 
@@ -168,7 +158,8 @@
   background-color: pink;
   width: 8vw;
   border-radius: 2vh;
-  line-height: 7vh;
+  line-height: 5vh;
+  height: 11vh;
 
 }
 
@@ -176,7 +167,8 @@
   background-color: mintcream;
   width: 8vw;
   border-radius: 2vh;
-  line-height: 7vh;
+  line-height: 5vh;
+  height: 11vh;
 
 }
 
