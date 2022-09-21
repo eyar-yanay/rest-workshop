@@ -38,14 +38,12 @@ app.use(bodyParser.json());
 app.get('/api/', (req, res) => {
 	res.send({ data: 'your server is working (;' });
 });
+
 // flavors API
 app.get('/api/flavor', (req, res) => {
 	const toGive = fakeDB.flavors;
 	res.json(toGive);
 });
-
-
-
 
 app.post('/api/flavor', (req, res) => {
 	console.log(req.body);

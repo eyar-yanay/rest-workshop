@@ -46,6 +46,7 @@ function App() {
 
   const getCustomer = async () => {
     // first mission: get the customer with id 2 from the server by including the id in the url as a parameter
+    const res = await fetch("http://localhost:8000/api/flavor")
   }
 
   const updateFlavorAmount = async () => {
