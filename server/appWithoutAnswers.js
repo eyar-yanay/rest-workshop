@@ -47,11 +47,11 @@ app.get('/api/customer/:id', (req, res) => {
 	//First Mission: return to client customer from FakeDB - specified by param
 })
 
-// Second Mission - (PUT) create a route that handles buying ice cream flavor by id from req.query, recive flavor and amount from query
-	
-// Third Mission - (Post) create a route that handle adding new flavor to the fakeDB. receive flavors through req.body
+//! Second Mission - (PUT) create a route that handles buying ice cream flavor by id from req.query, recive flavor and amount from query
 
-// Extra Mission - (Delete) create a route that handle deleting flavor from the fakeDB.flavors through req.params
+//! Third Mission - (Post) create a route that handle adding new flavor to the fakeDB. receive flavors through req.body
+
+//! Extra Mission - (Delete) create a route that handle deleting flavor from the fakeDB.flavors through req.params
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}!`)
