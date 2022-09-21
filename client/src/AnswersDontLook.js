@@ -38,7 +38,7 @@ function AnswersDontLook() {
       alert(_SERVER_ERROR);
     }
   };
-
+//first mission
   const getCustomer = async () => {
     try {
       const res = await fetch("http://localhost:8000/api/customer/2"); // fetching the data from the server

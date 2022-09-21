@@ -1,26 +1,42 @@
 .App {
+  font-family: 'Fuzzy Bubbles', cursive;
+  ;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: ce;
   height: 100vh;
-  background-image: url("./ice-cream.jpg");
+  background-image: url("./1312.jpg");
   background-size: cover;
 
 }
 
+.welcome {
+  display: flex;
+  align-self: center;
+  font-size: 4vh;
+  color: white;
+  background-color: #9be2cb;
+  border-radius: 7vh;
+  height: 12vh;
+  align-items: center;
+  /* width: 100vw; */
+  padding: 0vh 2vh;
+}
+
 .container {
-  margin-bottom: 7vh;
+  /* margin-bottom: 7vh; */
   opacity: 0.95;
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
-  width: 30%;
+  flex-direction: row;
+  /* width: 30%; */
   height: 70%;
   padding: 40px;
-  background-color: #f5f5f5;
-  box-shadow: blue 0px 0px 0px 2px inset,
+  /* background-color: #f5f5f5; */
+  /* box-shadow: blue 0px 0px 0px 2px inset,
     rgb(255, 255, 255) 10px -10px 0px -3px,
     rgb(31, 193, 27) 10px -10px,
     rgb(255, 255, 255) 20px -20px 0px -3px,
@@ -28,30 +44,100 @@
     rgb(255, 255, 255) 30px -30px 0px -3px,
     rgb(255, 156, 85) 30px -30px,
     rgb(255, 255, 255) 40px -40px 0px -3px,
-    rgb(255, 85, 85) 40px -40px;
-  border-radius: 10px;
-  border: black solid 2px;
+    rgb(255, 85, 85) 40px -40px; */
+  /* border-radius: 10px; */
+  /* border: black solid 2px; */
 }
+
 
 .message,
 .customers {
-  color: black;
-  font-size: 20px;
+  color: white;
+  font-size: 4vh;
   padding: 20px;
-  border: double 5px black;
+  /* border: double 5px black; */
+  background-color: #9be2cb;
+  border-radius: 3vh;
+  height: 35vh;
+  width: 35vw;
+
+} .message:hover{
+  animation-duration: 0.5s;
+  animation-name: animate-pop;
+  animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
 }
 
-.message {
+.post-button {
+  font-size: 3vh;
+  border-radius: 3vh;
+  border: none;
+  color: #9be2cb;
+  background: #2d8e7e;
+  padding: 0.5vw;
+}
+
+.post-input {
+  height: 5vh;
+  border-radius: 3vh;
+  border: none;
+  font-size: 2.5vh;
+  /* background: #2d8e7e; */
+  background-color: #9be2cb;
+  color: #2d8e7e;
+  border: #2d8e7e solid 3px;
+}
+
+
+::placeholder {
+  color: #2d8e7e;
+}
+
+
+.post-select {
+  border: none;
+  color: #2d8e7e;
+  background: #9be2cb;
+  height: 5vh;
+  font-size: 3vh;
+}
+
+.search,
+.post-select {
+  border-radius: 3vh;
+  border: #2d8e7e solid 2px;
+  padding: 1vh;
+  height: 6vh;
+}
+
+.our-message {
+  margin-bottom: 3vh;
+  margin-top: 2vh;
+}
+
+/* .message {
   border-color: rgb(255, 217, 19);
 }
 
 .customers {
   border-color: rgb(31, 193, 27);
 }
+*/
 
 .search-flavor {
-  background-color: rgb(255, 156, 85);
-  border-radius: 5px ;
+  height: 35vh;
+  background: #9be2cb;
+  width: 35vw;
+  border-radius: 3vh;
+  color: white;
+  font-size: 4.5vh;
+  padding: 20px;
+
+  
+}
+
+.search-div {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .button-container {
@@ -61,4 +147,42 @@
 
 .go-down {
   margin-bottom: -5%;
+}
+
+.vanilla {
+  background-color: beige;
+  width: 8vw;
+  border-radius: 2vh;
+  line-height: 7vh;
+}
+
+.chocolate {
+  background-color: chocolate;
+  width: 8vw;
+  border-radius: 2vh;
+  line-height: 7vh;
+
+}
+
+.strawberry {
+  background-color: pink;
+  width: 8vw;
+  border-radius: 2vh;
+  line-height: 7vh;
+
+}
+
+.mint {
+  background-color: mintcream;
+  width: 8vw;
+  border-radius: 2vh;
+  line-height: 7vh;
+
+}
+
+.flavours {
+  display: flex;
+  justify-content: space-between;
+  font-size: 3vh;
+  color: black;
 }
