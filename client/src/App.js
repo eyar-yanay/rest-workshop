@@ -27,7 +27,6 @@ function App() {
     setNewStock(e.target.value);
   }
 
-  
   // excute the fetch functions when the component is mounted
   useEffect(() => {
     getFlavors();
@@ -45,24 +44,16 @@ function App() {
     }
   }
 
-  // excute the fetch functions when the component is mounted
-  useEffect(() => {
-    getFlavors();
-    getCustomer();
-  }, [])
-
-
-
   const getCustomer = async () => {
-  // first mission: get the customer with id 2 from the server by including the id in the url as a parameter
+    // first mission: get the customer with id 2 from the server by including the id in the url as a parameter
   }
 
   const updateFlavorAmount = async () => {
-  // second mission: buy a flavor by name and quantity using searchFlavor and amountFlavor states. here 
+    // second mission: buy a flavor by name and quantity using searchFlavor and amountFlavor states. here 
   }
 
   const postFlavor = async () => {
-  // third mission: add a new flavor - passing amount and flavor name using body  
+    // third mission: add a new flavor - passing amount and flavor name using body  
   }
 
 
@@ -83,7 +74,7 @@ function App() {
             }
 
             <div>
-              <button onClick={async ()=>  {await postFlavor(); getFlavors()}}>Post data</button>
+              <button onClick={async () => { await postFlavor(); getFlavors() }}>Post data</button>
               <input type="text" placeholder="new flavor" value={newFlavor} onChange={handleNewFlavorChange} />
               <select placeholder='amount' value={newStock} onChange={handleNewStockChange}>
                 {_ARRAY_OF_NUMBERS.map(number => {
